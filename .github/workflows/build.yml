@@ -2,7 +2,7 @@ name: Build Yoru Optimized
 
 on:
   push:
-    branches: [ "main" ]   # Runs when you push to main branch
+    branches: [ "main" ]   # Runs whenever you push to main branch
 
 jobs:
   build:
@@ -18,13 +18,13 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: gradle build
 
-      - name: Upload artifact
+      - name: Upload mod JAR
         uses: actions/upload-artifact@v3
         with:
           name: yoru-optimized
